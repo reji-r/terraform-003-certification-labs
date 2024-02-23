@@ -1,12 +1,5 @@
 terraform {
-  cloud {
-    organization = "cloud-dragons"
-
-    workspaces {
-      name = "provisioners"
-    }
-  }
-
+  
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -29,7 +22,7 @@ data "template_file" "user_data" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzdwDj+ah69rtgqkX7QCvQrSp5nesucWUlNhq0uIZIh5MyA09jPJtMI9YuCYKPGwpVhfrCCmQ5BxiQLOGGNr4X3oP80DWeXTZHqiWaNurwIubf44EBFpuqwlQofKLtWhC63OERAeIQoOhcwoGM+LLOgYdZD0U6DROzR/ttHd/jlK1ELMBTYTIfh2VHxn/OVJg+lxkUbMAYSAc9syzmhC4BxwjCiem7vVvsZXkTOEOba6dkeuUfQds9Izx8A7bYJv75JjhWv7o1DI4dDOF4+PAyL0/ZP5mIWwUe+YaAj+RydT5sHkE3Z4Qg9Giv5gJtBhUzPAwnLRmmSYlAMhA/vB/AtYjKcU/eEVDWHAOb129jqn3CjhgOleWYE4BMrVm+3+5nvBKYwj+7uQmH1SRrd7IDGQygt1P1/xJSvtQWAvo34qoo6JWxAHshOOiUWvflKDPfhBCNNUQjKeuvjluVkS0rhfP+PialLZFeestL7cXTbbZd0dNbBDAL05Ze9HzaXSE= rejiprn@Reji-Laptop"
+  public_key = "YOUR_SSH_KEY"
 }
 
 resource "aws_instance" "my_server" {
@@ -67,7 +60,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_http" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
   security_group_id = aws_security_group.sg_my_server.id
-  cidr_ipv4         = "82.24.44.124/32"
+  cidr_ipv4         = "Your_IP_address"
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
